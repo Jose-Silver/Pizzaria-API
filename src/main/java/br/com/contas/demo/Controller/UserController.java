@@ -1,10 +1,6 @@
 package br.com.contas.demo.Controller;
 
-import br.com.contas.demo.DTO.UserDTO;
-import br.com.contas.demo.Entity.Anotacao;
-import br.com.contas.demo.Entity.User;
 import br.com.contas.demo.Service.UserService;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

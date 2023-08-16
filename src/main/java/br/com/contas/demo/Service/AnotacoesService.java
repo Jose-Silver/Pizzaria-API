@@ -1,8 +1,5 @@
 package br.com.contas.demo.Service;
 
-import br.com.contas.demo.DTO.AnotacaoDTO;
-import br.com.contas.demo.Entity.Anotacao;
-import br.com.contas.demo.Entity.User;
 import br.com.contas.demo.Repository.AnotacaoRepository;
 import br.com.contas.demo.Repository.UserRepository;
 import org.springframework.beans.BeanUtils;

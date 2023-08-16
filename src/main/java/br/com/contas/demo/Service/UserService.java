@@ -1,18 +1,12 @@
 package br.com.contas.demo.Service;
 
-import br.com.contas.demo.DTO.UserDTO;
-import br.com.contas.demo.Entity.Anotacao;
-import br.com.contas.demo.Entity.User;
 import br.com.contas.demo.Repository.UserRepository;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.security.auth.RefreshFailedException;
 import java.util.List;
 
 @Service
