@@ -1,38 +1,23 @@
-package br.com.contas.demo.Entity;
+package br.com.contas.demo.DTO;
 
-import jakarta.persistence.*;
+import br.com.contas.demo.Entity.Client;
 
-import java.util.List;
 
-@Entity
-public class Adress {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
-    private Long id;
+public class AdressDTO {
 
     private String cidade;
     private String rua;
     private Integer numero_rua;
-    @ManyToMany
-    private List<Client> cliente;
+    private Client cliente;
 
-    public Adress() {
+    public AdressDTO() {
     }
 
-    public Adress(Long id, String cidade, String rua, Integer numero_rua) {
-        this.id = id;
+    public AdressDTO(String cidade, String rua, Integer numero_rua) {
+
         this.cidade = cidade;
         this.rua = rua;
         this.numero_rua = numero_rua;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getCidade() {

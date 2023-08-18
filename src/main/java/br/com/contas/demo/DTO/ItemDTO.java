@@ -1,16 +1,11 @@
-package br.com.contas.demo.Entity;
+package br.com.contas.demo.DTO;
 
+import br.com.contas.demo.Entity.Sabor;
 import jakarta.persistence.*;
 
 import java.util.List;
 
-@Entity
-public class Item {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
-    private Long id;
-
+public class ItemDTO {
 
 
     private String codigo;
@@ -19,31 +14,19 @@ public class Item {
     private Integer tamanho;
     private String extra;
     private String remove;
-@ManyToMany
-    private List<Sabor> sabor;
+    private List<Long> sabor;
 
-    public Item() {
+    public ItemDTO() {
     }
 
-    public Item(Long id, String codigo, Float preco, Boolean pizza) {
-        this.id = id;
-        this.codigo = codigo;
-        this.preco = preco;
-        this.pizza = pizza;
-    }
-
-    public Item(Long id, String codigo, Float preco, Boolean pizza, Integer tamanho, String extra, String remove) {
-        this.id = id;
+    public ItemDTO(String codigo, Float preco, Boolean pizza, Integer tamanho, String extra, String remove, List<Long> sabor) {
         this.codigo = codigo;
         this.preco = preco;
         this.pizza = pizza;
         this.tamanho = tamanho;
         this.extra = extra;
         this.remove = remove;
-    }
-
-    public Long getId() {
-        return id;
+        this.sabor = sabor;
     }
 
     public String getCodigo() {
@@ -92,5 +75,13 @@ public class Item {
 
     public void setRemove(String remove) {
         this.remove = remove;
+    }
+
+    public List<Long> getSabor() {
+        return sabor;
+    }
+
+    public void setSabor(List<Long> sabor) {
+        this.sabor = sabor;
     }
 }
