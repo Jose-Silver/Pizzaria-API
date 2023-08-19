@@ -2,7 +2,7 @@ package br.com.contas.demo.DTO;
 
 import br.com.contas.demo.Entity.Client;
 import br.com.contas.demo.Entity.Item;
-import jakarta.persistence.*;
+import br.com.contas.demo.Entity.Payment;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -10,8 +10,7 @@ import java.util.List;
 public class OrdersDTO {
 
     private LocalDateTime data;
-
-    private Integer payment;
+    private Payment payment;
 
     private Integer status;
 
@@ -23,7 +22,7 @@ public class OrdersDTO {
     public OrdersDTO() {
     }
 
-    public OrdersDTO(LocalDateTime data, Integer payment, Integer status, String description, br.com.contas.demo.Entity.Client cliente, List<Item> items) {
+    public OrdersDTO(LocalDateTime data, Payment payment, Integer status, String description, Client cliente, List<Item> items) {
 
         this.data = data;
         this.payment = payment;
@@ -41,11 +40,11 @@ public class OrdersDTO {
         this.data = data;
     }
 
-    public Integer getPayment() {
+    public Enum<Payment> getPayment() {
         return payment;
     }
 
-    public void setPayment(Integer payment) {
+    public void setPayment(Payment payment) {
         this.payment = payment;
     }
 

@@ -1,6 +1,7 @@
 package br.com.contas.demo.Entity;
 
 import jakarta.persistence.*;
+import org.hibernate.usertype.StaticUserTypeSupport;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,10 +14,10 @@ public class Orders {
     private Long id;
 
     private LocalDateTime data;
+    @Enumerated(EnumType.STRING)
+    private Payment payment;
 
-    private Integer payment;
-
-    private Integer status;
+    private Status status;
 
     private String Description;
 
@@ -29,7 +30,7 @@ public class Orders {
     public Orders() {
     }
 
-    public Orders(Long id, LocalDateTime data, Integer payment, Integer status, String description, Client cliente, List<Item> items) {
+    public Orders(Long id, LocalDateTime data, Payment payment, Integer status, String description, Client cliente, List<Item> items) {
         this.id = id;
         this.data = data;
         this.payment = payment;
@@ -55,11 +56,11 @@ public class Orders {
         this.data = data;
     }
 
-    public Integer getPayment() {
+    public Enum<Payment> getPayment() {
         return payment;
     }
 
-    public void setPayment(Integer payment) {
+    public void setPayment(Payment payment) {
         this.payment = payment;
     }
 
