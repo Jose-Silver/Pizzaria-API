@@ -3,16 +3,16 @@ package br.com.contas.demo.DTO;
 import br.com.contas.demo.Entity.Client;
 import br.com.contas.demo.Entity.Item;
 import br.com.contas.demo.Entity.Payment;
+import br.com.contas.demo.Entity.Status;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class OrdersDTO {
 
-    private LocalDateTime data;
     private Payment payment;
 
-    private Integer status;
+    private Status status;
 
     private String Description;
 
@@ -22,9 +22,8 @@ public class OrdersDTO {
     public OrdersDTO() {
     }
 
-    public OrdersDTO(LocalDateTime data, Payment payment, Integer status, String description, Client cliente, List<Item> items) {
+    public OrdersDTO( Payment payment, Status status, String description, Client cliente, List<Item> items) {
 
-        this.data = data;
         this.payment = payment;
         this.status = status;
         Description = description;
@@ -32,13 +31,6 @@ public class OrdersDTO {
         this.items = items;
     }
 
-    public LocalDateTime getData() {
-        return data;
-    }
-
-    public void setData(LocalDateTime data) {
-        this.data = data;
-    }
 
     public Enum<Payment> getPayment() {
         return payment;
@@ -48,11 +40,11 @@ public class OrdersDTO {
         this.payment = payment;
     }
 
-    public Integer getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

@@ -12,7 +12,7 @@ import java.util.List;
 
 @Controller
 @RestController
-@RequestMapping("/itemDTO")
+@RequestMapping("/Item")
 public class ItemController {
 
     @Autowired

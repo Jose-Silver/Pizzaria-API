@@ -9,7 +9,7 @@ public class Delivery {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private Integer MetodoEntrega;
+    private MetodoEntrega metodoEntrega;
 
     private String DeliveryName;
 
@@ -30,12 +30,12 @@ public class Delivery {
         this.id = id;
     }
 
-    public Integer getMetodoEntrega() {
-        return MetodoEntrega;
+    public MetodoEntrega getMetodoEntrega() {
+        return metodoEntrega;
     }
 
-    public void setMetodoEntrega(Integer metodoEntrega) {
-        MetodoEntrega = metodoEntrega;
+    public void setMetodoEntrega(MetodoEntrega metodoEntrega) {
+        metodoEntrega = metodoEntrega;
     }
 
     public String getDeliveryName() {
@@ -54,11 +54,11 @@ public class Delivery {
         ValueDelivery = valueDelivery;
     }
 
-    public Delivery(Long id, Integer metodoEntrega, String deliveryName, Float valueDelivery, Orders order) {
+    public Delivery(Long id, MetodoEntrega metodoEntrega, String deliveryName, Float valueDelivery, Orders order) {
         this.id = id;
-        MetodoEntrega = metodoEntrega;
-        DeliveryName = deliveryName;
-        ValueDelivery = valueDelivery;
+        this.metodoEntrega = metodoEntrega;
+        this.DeliveryName = deliveryName;
+        this.ValueDelivery = valueDelivery;
         this.order = order;
     }
 

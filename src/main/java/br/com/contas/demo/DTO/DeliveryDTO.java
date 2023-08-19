@@ -1,12 +1,13 @@
 package br.com.contas.demo.DTO;
 
+import br.com.contas.demo.Entity.MetodoEntrega;
 import br.com.contas.demo.Entity.Orders;
 import jakarta.persistence.*;
 
 
 public class DeliveryDTO {
 
-    private Integer MetodoEntrega;
+    private br.com.contas.demo.Entity.MetodoEntrega metodoEntrega;
 
     private String DeliveryName;
 
@@ -18,19 +19,19 @@ public class DeliveryDTO {
     public DeliveryDTO() {
     }
 
-    public DeliveryDTO(Integer metodoEntrega, String deliveryName, Float valueDelivery, Orders order) {
-        MetodoEntrega = metodoEntrega;
+    public DeliveryDTO(MetodoEntrega metodoEntrega, String deliveryName, Float valueDelivery, Orders order) {
+        this.metodoEntrega = metodoEntrega;
         DeliveryName = deliveryName;
         ValueDelivery = valueDelivery;
         this.order = order;
     }
 
-    public Integer getMetodoEntrega() {
-        return MetodoEntrega;
+    public MetodoEntrega getMetodoEntrega() {
+        return metodoEntrega;
     }
 
-    public void setMetodoEntrega(Integer metodoEntrega) {
-        MetodoEntrega = metodoEntrega;
+    public void setMetodoEntrega(MetodoEntrega metodoEntrega) {
+        this.metodoEntrega = metodoEntrega;
     }
 
     public String getDeliveryName() {
