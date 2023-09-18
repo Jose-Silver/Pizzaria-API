@@ -5,12 +5,18 @@ import br.com.contas.demo.DTO.ClientDTO;
 import br.com.contas.demo.Entity.Client;
 import br.com.contas.demo.Repository.ClientRepository;
 import br.com.contas.demo.Service.ClientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RestController
@@ -34,7 +40,7 @@ public List<Client> Findall() {
 
     @PostMapping
 
-    public ResponseEntity<Client> create (@RequestBody
+    public ResponseEntity<Client> create (@Valid @RequestBody
     ClientDTO clientDTO) {
 
         return service.create(clientDTO);
@@ -56,5 +62,7 @@ public List<Client> Findall() {
     public ResponseEntity<Object> addAdress (@RequestBody AdressDTO adressDTO, @RequestParam Long id){
     return service.AddAdress(id, adressDTO);
 }
+
+
 
 }

@@ -1,13 +1,50 @@
 package br.com.contas.demo.DTO;
 
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Data;
+import lombok.Getter;
+import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import java.util.HashMap;
+import java.util.Map;
+@Data
 public class ClientDTO {
+    @Valid
+
+    @Getter
+    @Size(min = 3, max = 30, message = "tamanho do nome invalido")
+    @NotNull( message = "nome nao pode ser nulo")
+
     private String nome;
 
+    @Getter
+    @Size(max = 13, message = "Formato invalido")
+    @NotNull(message = "numero nao pode ser nulo")
     private String phone;
+    @Getter
+    @CPF( message = "formato invalido")
+    private  String cpf;
 
-    private String cpf;
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleValidationException (MethodArgumentNotValidException exception){
+        Map<String,String> errors = new HashMap<>();
+        exception.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldname = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldname, errorMessage);
+        });
 
+        return errors;
+    };
     public ClientDTO() {
     }
 

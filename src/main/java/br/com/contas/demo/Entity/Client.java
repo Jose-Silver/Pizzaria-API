@@ -1,52 +1,56 @@
 package br.com.contas.demo.Entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import jakarta.validation.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Entity
 @Table(name = "client")
+
 public class Client {
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Getter
+
     private String nome;
 
+    @Getter
     private String phone;
-
+    @Getter
     private  String cpf;
-
     @ManyToMany
     private List<Adress> adress;
 
-    public Long getId() {
-        return id;
-    }
+
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getCpf() {
-        return cpf;
     }
 
     public void setCpf(String cpf) {
@@ -64,4 +68,6 @@ public class Client {
     public void addEndereco(Adress adress) {
         this.adress.add(adress);
     }
+
+
 }

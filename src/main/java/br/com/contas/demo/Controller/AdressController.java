@@ -3,6 +3,7 @@ package br.com.contas.demo.Controller;
 import br.com.contas.demo.DTO.AdressDTO;
 import br.com.contas.demo.Entity.Adress;
 import br.com.contas.demo.Service.AdressService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ public class AdressController {
 
     @PostMapping
 
-    public ResponseEntity<Adress> create(@RequestBody
+    public ResponseEntity<Adress> create( @Valid @RequestBody
     AdressDTO adressDTO) {
 
         return service.create(adressDTO);

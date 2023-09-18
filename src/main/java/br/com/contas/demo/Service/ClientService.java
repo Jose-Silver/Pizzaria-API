@@ -6,13 +6,15 @@ import br.com.contas.demo.Entity.Adress;
 import br.com.contas.demo.Entity.Client;
 import br.com.contas.demo.Repository.AdressRepository;
 import br.com.contas.demo.Repository.ClientRepository;
+import jakarta.validation.Valid;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +31,7 @@ public class ClientService {
 
     public List<Client> Findall() { return repository.findAll();}
 
-    public List<Client> FindByName(String name) { return Collections.singletonList(repository.findByName(name));}
+    public List<Client> FindByName(String name) { return Collections.singletonList(repository.findByNome(name));}
 
     public ResponseEntity<Object> update (Long id, ClientDTO clientDTO){
         Optional<Client> cliente_update = repository.findById(id);
@@ -45,7 +47,7 @@ public class ClientService {
 
     }
 
-    public ResponseEntity<Client> create(ClientDTO clientDTO){
+    public ResponseEntity<Client> create( ClientDTO clientDTO){
 
         try {
             Client cliente = new Client();
@@ -55,9 +57,12 @@ public class ClientService {
 
             return ResponseEntity.ok(cliente);
         } catch (Exception e) {
-         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);}
+         throw new RuntimeException(e.getCause().getMessage()) ;
+                 }
 
     }
+
+
 
     public ResponseEntity<Object> AddAdress(Long id, AdressDTO adressdto) {
         Optional<Client> cliente_update = repository.findById(id);
