@@ -39,6 +39,9 @@ public class Client {
     @ManyToMany
     private List<Adress> adress;
 
+    public Client(String nome, String phone, String cpf) {
+
+    }
 
 
     public void setId(Long id) {
