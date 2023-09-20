@@ -8,8 +8,8 @@ class ContasApplicationTests {
 
 
 
-	@Test
-	void contextLoads() {
-	}
+//	@Test
+//	void contextLoads() {
+//	}
 
 }

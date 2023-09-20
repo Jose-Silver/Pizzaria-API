@@ -43,6 +43,8 @@ public class Client {
 
     }
 
+    public Client() {
+    }
 
     public void setId(Long id) {
         this.id = id;

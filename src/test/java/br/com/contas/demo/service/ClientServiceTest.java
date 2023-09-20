@@ -1,48 +1,129 @@
 package br.com.contas.demo.service;
 
+import br.com.contas.demo.DTO.AdressDTO;
 import br.com.contas.demo.DTO.ClientDTO;
+import br.com.contas.demo.Entity.Adress;
 import br.com.contas.demo.Entity.Client;
 import br.com.contas.demo.Repository.AdressRepository;
 import br.com.contas.demo.Repository.ClientRepository;
 import br.com.contas.demo.Service.ClientService;
-import org.hamcrest.Matcher;
-import org.hamcrest.MatcherAssert;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.BeanUtils;
+
+import java.util.Optional;
 
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class ClientServiceTest {
 
-    @InjectMocks
-    ClientService service;
-
+    private ClientService underTest;
+    @Mock
+    private Client clientMock;
     @Mock
     private ClientRepository repository;
     @Mock
     private AdressRepository adressRepository;
     ClientDTO client;
+
     @BeforeEach
-    private void Setup () {
-        client = new ClientDTO("", "45999326309", "01025471903");
+    public void Setup() {
 
+       MockitoAnnotations.initMocks(this);
+       underTest = new ClientService(repository, adressRepository);
     }
+
     @Test
- private void teste1 () {
-        final RuntimeException e = assertThrows(RuntimeException.class, () -> {
-            service.create(client);
-        });
+    void canFindallClient() {
+        //when
+        underTest.Findall();
+        //then
+        verify(repository).findAll();
+    }
 
-    MatcherAssert.assertThat(e, notNullValue());
+    @Test
+    void findByName() {
+        //when
+        underTest.FindByName("teste");
+        //then
+        verify(repository).findByNome("teste");
+    }
+
+    @Test
+    @Disabled
+    void update() {
+    }
+
+    @Test
+    void create() {
+        //given
+
+        ClientDTO clientDTO = new ClientDTO("Jose", "4599326309", "010.254.719-03");
+        Client cliente = new Client();
+        BeanUtils.copyProperties(clientDTO, cliente);
+
+        //when
+        underTest.create(clientDTO);
+        //then
+        ArgumentCaptor<Client> clientArgumentCaptor =
+                ArgumentCaptor.forClass(Client.class);
+
+        verify(repository).save(clientArgumentCaptor.capture());
+    }
+
+    @Test
+    void addAdress() {
+        //given
+        ClientDTO clientDTO = new ClientDTO("Jose", "4599326309", "010.254.719-03");
+        Client cliente = new Client();
+        BeanUtils.copyProperties(clientDTO, cliente);
+        Mockito.when(repository.findById(1L)).thenReturn(Optional.of(cliente));
+        Adress adress = new Adress();
+        AdressDTO adressDTO = new AdressDTO();
+        adress.setCidade("foz");
+        adress.setRua("Av das cataratas");
+        adress.setNumero_rua(12);
+        BeanUtils.copyProperties(adress,adressDTO);
+
+        //when
+        underTest.AddAdress(1L,adressDTO );
+
+        //then
+        ArgumentCaptor<Adress> adressArgumentCaptor =
+                ArgumentCaptor.forClass(Adress.class);
+
+        ArgumentCaptor<Client> clientArgumentCaptor =
+                ArgumentCaptor.forClass(Client.class);
+        verify(adressRepository).save(adressArgumentCaptor.capture());
+
+        verify(repository).save(clientArgumentCaptor.capture());
 
     }
+
+    @Test
+
+    void delete() {
+    }
+//    @Test
+// private void teste1 () {
+//        final RuntimeException e = assertThrows(RuntimeException.class, () -> {
+//            service.create(client);
+//        });
+//
+//    MatcherAssert.assertThat(e, notNullValue());
+//
+//    }
 
 
 }

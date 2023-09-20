@@ -6,15 +6,12 @@ import br.com.contas.demo.Entity.Adress;
 import br.com.contas.demo.Entity.Client;
 import br.com.contas.demo.Repository.AdressRepository;
 import br.com.contas.demo.Repository.ClientRepository;
-import jakarta.validation.Valid;
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -22,16 +19,20 @@ import java.util.Optional;
 @Service
 public class ClientService {
 
-    @Autowired
+
     private ClientRepository repository;
-    @Autowired
+
     private AdressRepository adressRepository;
 
+    public ClientService(ClientRepository repository, AdressRepository adressRepository) {
+        this.repository = repository;
+        this.adressRepository = adressRepository;
+    }
 
 
     public List<Client> Findall() { return repository.findAll();}
 
-    public List<Client> FindByName(String name) { return Collections.singletonList(repository.findByNome(name));}
+    public List<Optional<Client>> FindByName(String name) { return Collections.singletonList(repository.findByNome(name));}
 
     public ResponseEntity<Object> update (Long id, ClientDTO clientDTO){
         Optional<Client> cliente_update = repository.findById(id);
@@ -47,7 +48,7 @@ public class ClientService {
 
     }
 
-    public ResponseEntity<Client> create( ClientDTO clientDTO){
+    public Client create( ClientDTO clientDTO){
 
         try {
             Client cliente = new Client();
@@ -55,7 +56,7 @@ public class ClientService {
 
             repository.save(cliente);
 
-            return ResponseEntity.ok(cliente);
+            return cliente;
         } catch (Exception e) {
          throw new RuntimeException(e.getCause().getMessage()) ;
                  }
@@ -64,14 +65,13 @@ public class ClientService {
 
 
 
-    public ResponseEntity<Object> AddAdress(Long id, AdressDTO adressdto) {
+    public Client AddAdress(Long id, AdressDTO adressdto) {
         Optional<Client> cliente_update = repository.findById(id);
         if ( cliente_update.isEmpty()) {
-            ResponseEntity<Object> objectResponseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            return objectResponseEntity;
+            throw new RuntimeException() ;
         } else {
-            Client client =cliente_update.get();
-            List<Adress> adresses = client.getEndereco();
+            Client client = cliente_update.get();
+            List<Adress> adresses = new ArrayList<>();
             Adress adress = new Adress();
 
             BeanUtils.copyProperties(adressdto, adress);
@@ -82,7 +82,7 @@ public class ClientService {
 
 
 
-            return ResponseEntity.ok(client);
+            return client;
 
         }
 
