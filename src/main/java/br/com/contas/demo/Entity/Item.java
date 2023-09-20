@@ -25,6 +25,12 @@ public class Item {
     public Item() {
     }
 
+    public Item( String codigo, Float preco, Boolean pizza) {
+
+        this.codigo = codigo;
+        this.preco = preco;
+        this.pizza = pizza;
+    }
     public Item(Long id, String codigo, Float preco, Boolean pizza) {
         this.id = id;
         this.codigo = codigo;

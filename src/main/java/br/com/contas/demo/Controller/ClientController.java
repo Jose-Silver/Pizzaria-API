@@ -43,7 +43,7 @@ public List<Client> Findall() {
     };
 
 @PutMapping("/update")
-    private ResponseEntity<Object> update(@RequestBody ClientDTO clientDTO, @RequestParam Long id){
+    private Client update(@RequestBody ClientDTO clientDTO, @RequestParam Long id){
     return service.update(id, clientDTO);
 }
 

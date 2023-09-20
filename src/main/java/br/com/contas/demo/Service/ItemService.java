@@ -1,7 +1,6 @@
 package br.com.contas.demo.Service;
 
 import br.com.contas.demo.DTO.ItemDTO;
-import br.com.contas.demo.Entity.Client;
 import br.com.contas.demo.Entity.Item;
 import br.com.contas.demo.Repository.ItemRepository;
 import org.springframework.beans.BeanUtils;
@@ -10,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +21,7 @@ public class ItemService {
 
     public List<Item> Findall() { return repository.findAll();}
 
-    public Item FindByCodigo(String name) { return repository.findByCodigo(name);}
+    public Optional<Item> FindByCodigo(String name) { return repository.findByCodigo(name);}
 
     public ResponseEntity<Object> update (Long id, ItemDTO itemDTO){
         Optional<Item> iteme_update = repository.findById(id);

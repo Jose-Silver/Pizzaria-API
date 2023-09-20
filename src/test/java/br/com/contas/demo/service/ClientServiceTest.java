@@ -61,8 +61,28 @@ public class ClientServiceTest {
     }
 
     @Test
-    @Disabled
+
     void update() {
+        ClientDTO clientDTO = new ClientDTO("jose update", "4599326309", "010.254.719-03");
+        ClientDTO clientUpdate = new ClientDTO("Jose", "4599326309", "010.254.719-03");
+
+        Client cliente = new Client();
+        Client clientUpdated = new Client();
+        BeanUtils.copyProperties(clientUpdate, cliente);
+        BeanUtils.copyProperties(clientDTO, cliente);
+        Mockito.when(repository.findById(1L)).thenReturn(Optional.of(cliente));
+
+        //when
+        underTest.update(1L, clientDTO);
+
+        //then
+        ArgumentCaptor<Client> clientArgumentCaptor =
+                ArgumentCaptor.forClass(Client.class);
+
+        verify(repository).delete(clientArgumentCaptor.capture());
+
+
+
     }
 
     @Test
@@ -114,16 +134,23 @@ public class ClientServiceTest {
     @Test
 
     void delete() {
+        //given
+        ClientDTO clientDTO = new ClientDTO("Jose", "4599326309", "010.254.719-03");
+        Client cliente = new Client();
+        BeanUtils.copyProperties(clientDTO, cliente);
+        Mockito.when(repository.findById(1L)).thenReturn(Optional.of(cliente));
+
+        //when
+        underTest.delete(1L);
+
+        //then
+        ArgumentCaptor<Client> clientArgumentCaptor =
+                ArgumentCaptor.forClass(Client.class);
+
+        verify(repository).delete(clientArgumentCaptor.capture());
+
+
     }
-//    @Test
-// private void teste1 () {
-//        final RuntimeException e = assertThrows(RuntimeException.class, () -> {
-//            service.create(client);
-//        });
-//
-//    MatcherAssert.assertThat(e, notNullValue());
-//
-//    }
 
 
 }

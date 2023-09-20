@@ -51,7 +51,6 @@ public class ClientRepositoryTest {
     @Test
     void findByNameTest () {
         Client client = new Client("Jose", "459911224630" , "010.254.719-03");
-
         underTest.save(client);
         Optional<Client> expected = underTest.findByNome(client.getNome());
         Assertions.assertThat(expected).isNotEmpty();

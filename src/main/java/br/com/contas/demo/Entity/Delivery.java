@@ -61,6 +61,13 @@ public class Delivery {
         this.ValueDelivery = valueDelivery;
         this.order = order;
     }
+    public Delivery(Long id, MetodoEntrega metodoEntrega, String deliveryName, Float valueDelivery) {
+        this.id = id;
+        this.metodoEntrega = metodoEntrega;
+        this.DeliveryName = deliveryName;
+        this.ValueDelivery = valueDelivery;
+
+    }
 
     public Orders getOrder() {
         return order;

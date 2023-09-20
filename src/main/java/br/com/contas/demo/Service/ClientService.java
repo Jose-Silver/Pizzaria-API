@@ -34,15 +34,15 @@ public class ClientService {
 
     public List<Optional<Client>> FindByName(String name) { return Collections.singletonList(repository.findByNome(name));}
 
-    public ResponseEntity<Object> update (Long id, ClientDTO clientDTO){
+    public Client update (Long id, ClientDTO clientDTO){
         Optional<Client> cliente_update = repository.findById(id);
         if ( cliente_update.isEmpty()) {
-            ResponseEntity<Object> objectResponseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            return objectResponseEntity;
+            throw new RuntimeException("cliente nao existe");
         } else {
             Client client = cliente_update.get();
             BeanUtils.copyProperties(clientDTO,client);
-            return ResponseEntity.ok(cliente_update);
+            repository.save(client);
+            return client;
 
         }
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RestController
@@ -25,7 +26,7 @@ public List<Item> Findall() {
 }
 
 @GetMapping("/codigo")
-private Item FindByCOdigo (@RequestParam String codigo) {
+private Optional<Item> FindByCOdigo (@RequestParam String codigo) {
     return service.FindByCodigo(codigo);
 }
 
