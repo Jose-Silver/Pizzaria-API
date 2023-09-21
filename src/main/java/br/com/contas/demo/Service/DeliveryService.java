@@ -16,29 +16,32 @@ import java.util.Optional;
 @Service
 public class DeliveryService {
 
-    @Autowired
+
     private DeliveryRepository repository;
 
+    public DeliveryService(DeliveryRepository repository) {
+        this.repository = repository;
+    }
 
     public List<Delivery> Findall() { return repository.findAll();}
 
     public List<Delivery> FindByMetodoEntrega(MetodoEntrega name) { return repository.findByMetodoEntrega(name);}
 
-    public ResponseEntity<Object> update (Long id, DeliveryDTO deliveryDTO){
+    public Delivery update (Long id, DeliveryDTO deliveryDTO){
         Optional<Delivery> delivery_update = repository.findById(id);
         if ( delivery_update.isEmpty()) {
-            ResponseEntity<Object> objectResponseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            return objectResponseEntity;
+            throw  new RuntimeException("Entrega nao econtrada");
         } else {
             Delivery delivery = delivery_update.get();
             BeanUtils.copyProperties(deliveryDTO,delivery);
-            return ResponseEntity.ok(delivery_update);
+            repository.save(delivery);
+            return delivery;
 
         }
 
     }
 
-    public ResponseEntity<Delivery> create(DeliveryDTO deliveryDTO){
+    public Delivery create(DeliveryDTO deliveryDTO){
 
         try {
             Delivery delivery = new Delivery();
@@ -46,25 +49,21 @@ public class DeliveryService {
 
             repository.save(delivery);
 
-            return ResponseEntity.ok(delivery);
+            return delivery;
         } catch (Exception e) {
-         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);}
-
+            throw new RuntimeException();
+        }
     }
 
 
-    public ResponseEntity<Object> delete ( Long id){
+    public ResponseEntity<String> delete ( Long id){
         Optional<Delivery> delivery_optional = repository.findById(id) ;
         if ( delivery_optional.isEmpty()) {
-            ResponseEntity<Object> objectResponseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            return objectResponseEntity;
+            throw new RuntimeException();
         } else {
-
-
         Delivery delivery = delivery_optional.get();
         repository.delete(delivery);
-        return ResponseEntity.ok("Deliverye deletado com sucesso");
-
+        return new ResponseEntity<>("Delivery deletado", HttpStatus.OK);
 
         }
 

@@ -33,19 +33,19 @@ private ResponseEntity<List<Delivery>> findByNome (@RequestParam MetodoEntrega n
 
     @PostMapping
 
-    public ResponseEntity<Delivery> create (@RequestBody
+    public Delivery create (@RequestBody
     DeliveryDTO deliveryDTO) {
 
         return service.create(deliveryDTO);
     };
 
 @PutMapping("/update")
-    private ResponseEntity<Object> update(@RequestBody DeliveryDTO deliveryDTO, @RequestParam Long id){
+    private Delivery update(@RequestBody DeliveryDTO deliveryDTO, @RequestParam Long id){
     return service.update(id, deliveryDTO);
 }
 
 @DeleteMapping
-    private ResponseEntity<Object> Delete(@RequestParam long id){
+    private ResponseEntity<String> Delete(@RequestParam long id){
 
     return service.delete(id);
 }

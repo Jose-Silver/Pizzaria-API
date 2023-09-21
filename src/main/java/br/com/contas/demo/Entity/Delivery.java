@@ -2,6 +2,8 @@ package br.com.contas.demo.Entity;
 
 import jakarta.persistence.*;
 
+import java.util.Optional;
+
 @Entity
 public class Delivery {
     @Id
@@ -17,7 +19,7 @@ public class Delivery {
 
     @OneToOne
     @JoinColumn(name = "order_id")
-    private Orders order;
+    private Optional<Orders> order;
 
     public Delivery() {
     }
@@ -54,7 +56,7 @@ public class Delivery {
         ValueDelivery = valueDelivery;
     }
 
-    public Delivery(Long id, MetodoEntrega metodoEntrega, String deliveryName, Float valueDelivery, Orders order) {
+    public Delivery(Long id, MetodoEntrega metodoEntrega, String deliveryName, Float valueDelivery, Optional<Orders> order) {
         this.id = id;
         this.metodoEntrega = metodoEntrega;
         this.DeliveryName = deliveryName;
@@ -69,11 +71,11 @@ public class Delivery {
 
     }
 
-    public Orders getOrder() {
+    public Optional<Orders> getOrder() {
         return order;
     }
 
-    public void setOrder(Orders order) {
+    public void setOrder(Optional<Orders> order) {
         this.order = order;
     }
 
