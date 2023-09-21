@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,7 @@ public class Orders {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private LocalDateTime data;
+    private LocalTime data;
 
     private LocalDate day;
     @Enumerated(EnumType.STRING)
@@ -34,12 +35,21 @@ public class Orders {
 
     public Orders(Long id, LocalDateTime data, Payment payment, Status status, String description, Client cliente, List<Item> items) {
         this.id = id;
-        this.data = data;
+        this.data = LocalTime.from(data);
         this.payment = payment;
         this.status = status;
         Description = description;
         this.cliente = cliente;
         this.items = items;
+        this.day = LocalDate.from(data);
+    }
+
+    public LocalDate getDay() {
+        return day;
+    }
+
+    public void setDay(LocalDate day) {
+        this.day = day;
     }
 
     public Long getId() {
@@ -50,12 +60,12 @@ public class Orders {
         this.id = id;
     }
 
-    public LocalDateTime getData() {
+    public LocalTime getData() {
         return data;
     }
 
     public void setData(LocalDateTime data) {
-        this.data = data;
+        this.data = LocalTime.from(data);
     }
 
     public Enum<Payment> getPayment() {

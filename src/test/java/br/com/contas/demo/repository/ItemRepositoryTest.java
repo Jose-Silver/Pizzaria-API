@@ -49,7 +49,6 @@ public class ItemRepositoryTest {
     }
 
     @Test
-    @Disabled
     public void NoFindByCodigoTest () {
         //given
 

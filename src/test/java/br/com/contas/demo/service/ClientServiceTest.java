@@ -45,7 +45,7 @@ public class ClientServiceTest {
     }
 
     @Test
-    void canFindallClient() {
+    void FindallClient() {
         //when
         underTest.Findall();
         //then
@@ -79,7 +79,7 @@ public class ClientServiceTest {
         ArgumentCaptor<Client> clientArgumentCaptor =
                 ArgumentCaptor.forClass(Client.class);
 
-        verify(repository).delete(clientArgumentCaptor.capture());
+        verify(repository).save(clientArgumentCaptor.capture());
 
 
 

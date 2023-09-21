@@ -20,14 +20,9 @@ import java.util.Optional;
 @DataJpaTest
 public class DeliveryRepositoryTest {
 
-    @InjectMocks
+    @Autowired
     private DeliveryRepository underTest;
 
-    @Mock
-    private Delivery delivery;
-
-    @Mock
-    private Orders orders;
 
 
     @AfterEach
