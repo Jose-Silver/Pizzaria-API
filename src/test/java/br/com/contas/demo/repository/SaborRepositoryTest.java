@@ -1,8 +1,6 @@
 package br.com.contas.demo.repository;
 
-import br.com.contas.demo.Entity.*;
-import br.com.contas.demo.Repository.OrdersRepository;
-import br.com.contas.demo.Repository.SaborRepository;
+import br.com.contas.demo.entity.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,9 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @DataJpaTest

@@ -1,25 +1,14 @@
 package br.com.contas.demo.repository;
 
-import br.com.contas.demo.Entity.*;
-import br.com.contas.demo.Repository.ClientRepository;
-import br.com.contas.demo.Repository.ItemRepository;
-import br.com.contas.demo.Repository.OrdersRepository;
-import br.com.contas.demo.Service.ClientService;
+import br.com.contas.demo.entity.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.w3c.dom.stylesheets.LinkStyle;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @DataJpaTest
 public class OrdersRepositoryTest {
@@ -28,7 +17,7 @@ public class OrdersRepositoryTest {
     public OrdersRepository  underTest;
 
     @Autowired
-    public ClientRepository clientRepository;
+    public Client_Repository clientRepository;
     @Autowired
     public ItemRepository itemRepository;
 
@@ -38,7 +27,7 @@ public class OrdersRepositoryTest {
         clientRepository.deleteAll();
     }
     @Test
-    public  void findByStatus () {
+      void findByStatus () {
         //given
         String codigo = "coca";
         Float preco = 5F;
@@ -61,7 +50,7 @@ public class OrdersRepositoryTest {
 
 
     @Test
-    public void findByDay () {
+     void findByDay () {
         //given
         String codigo = "coca";
         Float preco = 5F;

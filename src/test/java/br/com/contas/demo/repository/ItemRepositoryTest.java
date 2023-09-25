@@ -1,21 +1,12 @@
 package br.com.contas.demo.repository;
 
-import br.com.contas.demo.Entity.Delivery;
-import br.com.contas.demo.Entity.Item;
-import br.com.contas.demo.Entity.MetodoEntrega;
-import br.com.contas.demo.Entity.Orders;
-import br.com.contas.demo.Repository.DeliveryRepository;
-import br.com.contas.demo.Repository.ItemRepository;
+import br.com.contas.demo.entity.Item;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.List;
 import java.util.Optional;
 
 @DataJpaTest
@@ -30,7 +21,7 @@ public class ItemRepositoryTest {
     }
 
     @Test
-    public void findByCodigoTest () {
+     void findByCodigoTest () {
         //given
         String codigo = "coca";
         Float preco = 5F;
@@ -49,7 +40,7 @@ public class ItemRepositoryTest {
     }
 
     @Test
-    public void NoFindByCodigoTest () {
+     void NoFindByCodigoTest () {
         //given
 
         //when

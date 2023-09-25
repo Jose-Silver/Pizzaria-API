@@ -1,15 +1,12 @@
 package br.com.contas.demo.service;
 
-import br.com.contas.demo.DTO.AdressDTO;
-import br.com.contas.demo.DTO.ClientDTO;
-import br.com.contas.demo.Entity.Adress;
-import br.com.contas.demo.Entity.Client;
-import br.com.contas.demo.Repository.AdressRepository;
-import br.com.contas.demo.Repository.ClientRepository;
-import br.com.contas.demo.Service.ClientService;
-import org.junit.jupiter.api.AfterEach;
+import br.com.contas.demo.dto.AdressDTO;
+import br.com.contas.demo.dto.ClientDTO;
+import br.com.contas.demo.entity.Adress;
+import br.com.contas.demo.entity.Client;
+import br.com.contas.demo.repository.Adress_repository;
+import br.com.contas.demo.repository.Client_Repository;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -21,8 +18,6 @@ import org.springframework.beans.BeanUtils;
 
 import java.util.Optional;
 
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -32,9 +27,9 @@ public class ClientServiceTest {
     @Mock
     private Client clientMock;
     @Mock
-    private ClientRepository repository;
+    private Client_Repository repository;
     @Mock
-    private AdressRepository adressRepository;
+    private Adress_repository adressRepository;
     ClientDTO client;
 
     @BeforeEach

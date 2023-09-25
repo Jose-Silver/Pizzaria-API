@@ -1,8 +1,6 @@
 package br.com.contas.demo.repository;
 import org.assertj.core.api.Assertions;
-import org.assertj.core.api.Assertions.*;
-import br.com.contas.demo.Entity.Client;
-import br.com.contas.demo.Repository.ClientRepository;
+import br.com.contas.demo.entity.Client;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,7 @@ import java.util.Optional;
 public class ClientRepositoryTest {
 
     @Autowired
-    private ClientRepository underTest;
+    private Client_Repository underTest;
 
 
     @AfterEach
